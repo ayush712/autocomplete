@@ -1,0 +1,28 @@
+<div *ngIf="(vm$ | async) as vm" #container class="search-container">
+    <input #searchBox type="text" class="search-box" [placeholder]="vm.placeholder"
+        [formControl]="textControl"
+        (input)="onTextChange($event.target.value)" 
+        (keyup)="onKeyUp($event, $event.target.value)" 
+        (keydown)="onKeyDown($event)"
+        (click)="onTextBoxClick()">
+    <button (click)="onBtnClick()">
+        <i class="search-icon icon-Search" [hidden]="vm.loading">
+        </i>
+        <span class="search-loader" [hidden]="!vm.loading">
+        </span>
+    </button>
+    <ng-container *ngIf="(dropdownVm$ | async) as ddVm">
+        <section class="dropdown-container" #dropDownContainer [hidden]="!ddVm.dropdownOpen" (click)="outsideClick($event)">
+            <ul (click)="onDropdownClick($event)" [ngStyle]="{width: dropdownWidth + 'px'}" #dropDown>
+                <li *ngFor="let item of ddVm.searchResult; trackBy:trackById; let i = index" 
+                    tabindex = "0" 
+                    [ngClass]="{'has-focus': i == vm.focusIndex}" 
+                    [attr.data-key]="item.id" 
+                    [attr.data-value]="item.text"
+                    [toolTip]='{animate: false, content: item["text"], type: "leftRight", showIfRequired: true}'>
+                    {{item['text']}}
+                </li>
+            </ul>
+        </section>
+    </ng-container>
+</div>
