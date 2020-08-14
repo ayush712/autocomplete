@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+}
+.search-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+
+    .search-box {
+        width: ~'calc(100% - 28px)';
+        height: 28px;
+        border: 1px solid var(--border-color2);
+        padding: 0 8px;
+        border-radius: 2px 0 0 2px;
+        &:focus {
+            border-color: var(--text-color1);
+        }
+    }
+
+    button {
+        width: 28px;
+        height: 28px;
+        width: 28px;
+        height: 28px;
+        border-radius: 0 2px 2px 0;
+        background-color: #F7F7F7;
+        border: 1px solid var(--border-color2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        .search-icon:after {
+            content: '';
+        }
+        .search-loader{
+            margin: auto;
+            border: 1px solid var(--border-color3);
+            border-top: 1px solid var(--text-color1);
+            border-right: 1px solid var(--text-color1);
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            display: block;
+            animation: spin 1s infinite linear;
+            position: static;
+            &[hidden] {
+                display: none;
+            }
+        }
+    }
+}
+
+.dropdown-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 101; //topbar is 100
+    color: var(--text-color1);
+    font-size: 13px;
+    font-family: var(--font-family-regular);
+    &[hidden]{
+        display: none;
+    }
+    ul {
+        max-height: 200px; 
+        overflow: auto;
+        border-radius: 0 0 2px 2px;
+        background-color: #FFFFFF;
+        border: 1px solid var(--border-color2);
+        box-shadow: -1px 3px 7px 1px rgba(0,0,0,0.12);
+        position: absolute;
+        padding: 8px 0;
+    }
+    li {
+        height: 32px;
+        line-height: 32px;
+        cursor: pointer;
+        padding: 0 8px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        &.has-focus,
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.04);//var(--dd-hover-bg-color);
+        }
+    }
+}
